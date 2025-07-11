@@ -1,19 +1,21 @@
 <script setup>
 // Data ini akan kita pindah ke backend nanti
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import SectionTitle from './SectionTitle.vue';
-const educationHistory = ref([]);
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import SectionTitle from './SectionTitle.vue'
+const educationHistory = ref([])
 onMounted(async () => {
- try { const response = await
-axios.get('http://localhost:3000/api/education');
-educationHistory.value = response.data; } catch (error) {
-console.error(error); }
-});
-
+  try {
+    const response = await axios.get('http://localhost:3000/api/education')
+    educationHistory.value = response.data
+  } catch (error) {
+    console.error(error)
+  }
+})
 </script>
 <template>
-  <section id="pendidikan" class="py-20 bg-white">
+  <div class="p-8 bg-gray-50 rounded-lg shadow-lg h-full flex flex-col animate-slide-in-left">
+    <section id="pendidikan" class="py-20 bg-gray-50">
     <div class="container mx-auto px-6">
       <SectionTitle title="Riwayat Pendidikan" />
       <div class="relative">
@@ -21,25 +23,30 @@ console.error(error); }
         <div
           v-for="(edu, index) in educationHistory"
           :key="edu.id"
-          class="mb-8 flex justify-between items-center w-full"
+          v-animate-on-scroll
+          class="mb-8 flex justify-between transition-all duration-700 opacity-0 delay-[index*200]"
         >
           <div v-if="index % 2 === 0" class="w-full flex">
             <div class="w-1/2 pr-8 text-right">
               <p class="font-semibold text-blue-600">{{ edu.period }}</p>
-              <h3 class="text-2xl font-bold textgray-800">{{ edu.institution }}</h3>
+              <h3 class="text-2xl font-bold text-gray-800">{{ edu.institution }}</h3>
               <p class="text-gray-600">{{ edu.major }}</p>
             </div>
             <div class="w-1/2 flex justify-start">
-              <div class="w-4 h-4 bg-blue-600 rounded-full z-10"></div>
+              <div
+                class="w-4 h-4 bg-blue-600 rounded-full z-10 justify-center text-white text-sm font-bold relative -left-3 animate-bounce"
+              ></div>
             </div>
           </div>
           <div v-else class="w-full flex">
             <div class="w-1/2 flex justify-end">
-              <div class="w-4 h-4 bgblue-600 rounded-full z-10"></div>
+              <div
+                class="w-4 h-4 bg-blue-600 rounded-full z-10 justify-center text-white text-sm font-bold relative -right-3"
+              ></div>
             </div>
             <div class="w-1/2 pl-8 text-left">
               <p class="font-semibold text-blue-600">{{ edu.period }}</p>
-              <h3 class="text-2xl font-bold textgray-800">{{ edu.institution }}</h3>
+              <h3 class="text-2xl font-bold text-gray-800">{{ edu.institution }}</h3>
               <p class="text-gray-600">{{ edu.major }}</p>
             </div>
           </div>
@@ -47,4 +54,6 @@ console.error(error); }
       </div>
     </div>
   </section>
+  </div>
+
 </template>

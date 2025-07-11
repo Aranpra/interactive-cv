@@ -37,8 +37,7 @@ onMounted(async () => {
             <a
               :href="project.link"
               target="_blank"
-              rel="noopener
-noreferrer"
+              rel="noopener noreferrer"
               class="text-blue-600 font-semibold hover:underline"
               >Lihat Detail &rarr;</a
             >
