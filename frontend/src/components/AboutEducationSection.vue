@@ -1,26 +1,26 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-// HIGHLIGHT START: Definisi data educationHistory dipindahkan ke sini
-const educationHistory = ref([])
+// import { ref, onMounted } from 'vue'
+// import axios from 'axios'
+// // HIGHLIGHT START: Definisi data educationHistory dipindahkan ke sini
+// const educationHistory = ref([])
 import SectionTitle from './SectionTitle.vue'
 // HIGHLIGHT START: Impor Education dan AboutMe
 import Education from './userEducation.vue'
 import AboutMe from './AboutMe.vue'
 // HIGHLIGHT END: Impor Education dan AboutMe
 
-const fetchEducationHistory = async () => {
-  try {
-    const response = await axios.get('http://localhost:3000/api/education')
-    educationHistory.value = response.data
-  } catch (error) {
-    console.error('Error fetching education history:', error)
-  }
-}
+// const fetchEducationHistory = async () => {
+//   try {
+//     const response = await axios.get('http://localhost:3000/api/education')
+//     educationHistory.value = response.data
+//   } catch (error) {
+//     console.error('Error fetching education history:', error)
+//   }
+// }
 
-onMounted(() => {
-  fetchEducationHistory()
-})
+// onMounted(() => {
+//   fetchEducationHistory()
+// })
 // HIGHLIGHT END: Definisi data educationHistory dipindahkan ke sini
 </script>
 

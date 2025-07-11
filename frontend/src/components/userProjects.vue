@@ -3,14 +3,17 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
 const projects = ref([])
+// HIGHLIGHT START: Tambahkan API_URL
+const API_URL = import.meta.env.PROD ? '/api/projects' : 'http://localhost:3000/api/projects';
+const projects = ref([]);
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/projects')
-    projects.value = response.data
+    projects.value = (await axios.get(API_URL)).data; // HIGHLIGHT: Gunakan API_URL [cite: 723]
   } catch (error) {
-    console.error(error)
+    console.error('Gagal mengambil data proyek:', error); [cite: 725]
   }
-})
+});
+
 </script>
 <template>
   <section id="proyek" class="py-20 bg-white">
