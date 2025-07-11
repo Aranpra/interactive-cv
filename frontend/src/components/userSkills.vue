@@ -3,16 +3,19 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
 
-// HIGHLIGHT START: Tambahkan API_URL
-const API_URL = import.meta.env.PROD ? '/api/skills' : 'http://localhost:3000/api/skills'; // [cite: 700]
+// HIGHLIGHT START: API_URL untuk fetching data skills
+const API_URL = import.meta.env.PROD ? '/api/skills' : 'http://localhost:3000/api/skills';
 // HIGHLIGHT END
+
 const skills = ref([]);
 onMounted(async () => {
   try {
-    skills.value = (await axios.get(API_URL)).data; // HIGHLIGHT: Gunakan API_URL [cite: 704]
+    const response = await axios.get(API_URL); // HIGHLIGHT: Menggunakan API_URL
+    skills.value = response.data;
   } catch (error) {
-    console.error('Gagal mengambil data skill:', error); [cite: 706]
+    console.error('Gagal mengambil data skill:', error); // HIGHLIGHT: Log error yang lebih deskriptif
   }
+});
 </script>
 <template>
   <section id="skill" class="py-20 bg-gray-50">

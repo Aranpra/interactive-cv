@@ -2,18 +2,18 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
+// HIGHLIGHT START: API_URL untuk fetching data projects
+const API_URL = import.meta.env.PROD ? '/api/projects' : 'http://localhost:3000/api/projects'
+// HIGHLIGHT END
 const projects = ref([])
-// HIGHLIGHT START: Tambahkan API_URL
-const API_URL = import.meta.env.PROD ? '/api/projects' : 'http://localhost:3000/api/projects';
-const projects = ref([]);
 onMounted(async () => {
   try {
-    projects.value = (await axios.get(API_URL)).data; // HIGHLIGHT: Gunakan API_URL [cite: 723]
+    const response = await axios.get(API_URL) // HIGHLIGHT: Menggunakan API_URL
+    projects.value = response.data
   } catch (error) {
-    console.error('Gagal mengambil data proyek:', error); [cite: 725]
+    console.error('Gagal mengambil data proyek:', error) // HIGHLIGHT: Log error yang lebih deskriptif
   }
-});
-
+})
 </script>
 <template>
   <section id="proyek" class="py-20 bg-white">

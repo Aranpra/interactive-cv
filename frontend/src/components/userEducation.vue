@@ -4,12 +4,17 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
 
+// HIGHLIGHT START: API_URL untuk fetching data pendidikan
+const API_URL = import.meta.env.PROD ? '/api/education' : 'http://localhost:3000/api/education'
+// HIGHLIGHT END
+
 const educationHistory = ref([])
 onMounted(async () => {
   try {
-    educationHistory.value = (await axios.get(API_URL)).data; // HIGHLIGHT: Gunakan API_URL
+    const response = await axios.get(API_URL) // HIGHLIGHT: Menggunakan API_URL
+    educationHistory.value = response.data
   } catch (error) {
-    console.error('Gagal mengambil data pendidikan:' error); [cite: 690]
+    console.error('Gagal mengambil data pendidikan:', error) // HIGHLIGHT: Log error yang lebih deskriptif
   }
 })
 </script>
