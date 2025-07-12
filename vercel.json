@@ -26,7 +26,7 @@
   ],
   "builds": [
     {
-      "src": "frontend/src/views/HomeView.vue",
+      "src": "frontend/index.html",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "frontend/vite.config.js"
