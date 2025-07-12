@@ -16,6 +16,13 @@ async function seed() {
   // HIGHLIGHT END
 
   try {
+    // ... di dalam fungsi seed()
+    console.log("Memulai proses seeding data...");
+    // HIGHLIGHT: Tambahkan ini jika ingin menghapus tabel lama sebelum membuat yang baru
+    // await sql`DROP TABLE IF EXISTS skills, projects, education;`;
+    // console.log('Tabel lama dihapus (jika ada).');
+    // ... sisa kode CREATE TABLE IF NOT EXISTS
+
     await sql`
       CREATE TABLE IF NOT EXISTS education (
         id SERIAL PRIMARY KEY, 
@@ -67,6 +74,8 @@ async function seed() {
     `
       )
     );
+
+    
     console.log("Proses seeding data berhasil!");
   } catch (error) {
     console.error("Error seeding:", error);

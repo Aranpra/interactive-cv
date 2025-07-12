@@ -1,8 +1,13 @@
-// backend/index.js
+// backend/index.jsconst path = require("path");
+const path = require("path");
+// HIGHLIGHT: Pastikan path ini diimpor (biasanya sudah ada)
+require("dotenv").config({
+  path: path.resolve(__dirname, "..", ".env.development.local"),
+});
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer"); // HIGHLIGHT: Untuk upload file
-const path = require("path"); // HIGHLIGHT: Untuk path file
+// HIGHLIGHT: Untuk path file
 const { sql } = require("@vercel/postgres"); // HIGHLIGHT: Untuk koneksi database Postgres
 const app = express();
 const PORT = 3000;
@@ -105,7 +110,9 @@ app.get("/api/projects", async (req, res) => {
   }
 });
 // HIGHLIGHT END
-
+app.listen(PORT, () => {
+  console.log(`Server backend berjalan di http://localhost:${PORT}`);
+});
 // HIGHLIGHT START: Ini penting agar Vercel bisa menjalankan backend
 module.exports = app;
 // HIGHLIGHT END

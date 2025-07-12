@@ -2,7 +2,6 @@
 // Data ini akan kita pindah ke backend nanti
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import SectionTitle from './SectionTitle.vue'
 
 // HIGHLIGHT START: API_URL untuk fetching data pendidikan
 const API_URL = import.meta.env.PROD ? '/api/education' : 'http://localhost:3000/api/education'
@@ -13,6 +12,7 @@ onMounted(async () => {
   try {
     const response = await axios.get(API_URL) // HIGHLIGHT: Menggunakan API_URL
     educationHistory.value = response.data
+    console.log('testing')
   } catch (error) {
     console.error('Gagal mengambil data pendidikan:', error) // HIGHLIGHT: Log error yang lebih deskriptif
   }
@@ -22,7 +22,11 @@ onMounted(async () => {
   <div class="p-8 bg-gray-50 rounded-lg shadow-lg h-full flex flex-col animate-slide-in-left">
     <section id="pendidikan" class="py-20 bg-gray-50">
       <div class="container mx-auto px-6">
-        <SectionTitle title="Riwayat Pendidikan" />
+        <h3
+          class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2 animate-fade-in duration-1000"
+        >
+          Pendidikan
+        </h3>
         <div class="relative">
           <div class="absolute h-full border-r-2 border-gray-300" style="left: 50%"></div>
           <div
