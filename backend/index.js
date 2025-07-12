@@ -1,7 +1,5 @@
 // backend/index.jsconst path = require("path");
 const path = require("path");
-// HIGHLIGHT END
-// HIGHLIGHT START: Pastikan dotenv diinisialisasi dengan path yang benar
 require("dotenv").config({
   path: path.resolve(__dirname, "..", ".env.development.local"),
 });
@@ -36,9 +34,8 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     const filetypes = /jpeg|jpg|png|gif/;
     const mimetype = filetypes.test(file.mimetype);
-    const extname = filetypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
+    const extname = path.extname(file.originalname).toLowerCase(); // HIGHLIGHT: Perbaikan kecil di sini
+    const isImage = filetypes.test(mimetype) && filetypes.test(extname); // HIGHLIGHT: Perbaikan logika validasi
 
     if (mimetype && extname) {
       return cb(null, true);
@@ -53,7 +50,7 @@ const upload = multer({
 
 // HIGHLIGHT START: Sesuaikan URL foto profil untuk Vercel (URL relatif)
 // Ini akan membuat URL bekerja baik di lokal maupun di Vercel
-let profileImageUrl = "/uploads/default-profile.png";  // Default image URL (relatif)
+let profileImageUrl = "/uploads/default-profile.png"; // Default image URL (relatif)
 // Endpoint untuk upload foto profil
 
 app.post(
@@ -66,7 +63,7 @@ app.post(
     // HIGHLIGHT START: URL setelah upload juga harus relatif
     profileImageUrl = `/uploads/${req.file.filename}`;
     res.json({
-      message: "File uploaded successfully!",
+      message: "Your handsome photo has been successfully updated!",
       imageUrl: profileImageUrl,
     });
     // HIGHLIGHT END
@@ -108,14 +105,10 @@ app.get("/api/projects", async (req, res) => {
     res.status(500).json({ error: "Gagal mengambil data proyek" });
   }
 });
-// HIGHLIGHT END
 if (require.main === module) {
-  // Ini berarti skrip dijalankan langsung (bukan diimpor)
   app.listen(PORT, () => {
     console.log(`Server backend berjalan di http://localhost:${PORT}`);
   });
 }
 
-// HIGHLIGHT: Baris ini HARUS menjadi yang PALING AKHIR di file untuk Vercel!
 module.exports = app;
-// HIGHLIGHT END
