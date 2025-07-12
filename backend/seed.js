@@ -19,8 +19,8 @@ async function seed() {
     // ... di dalam fungsi seed()
     console.log("Memulai proses seeding data...");
     // HIGHLIGHT: Tambahkan ini jika ingin menghapus tabel lama sebelum membuat yang baru
-    // await sql`DROP TABLE IF EXISTS skills, projects, education;`;
-    // console.log('Tabel lama dihapus (jika ada).');
+    await sql`DROP TABLE IF EXISTS skills, projects, education;`;
+    console.log('Tabel lama dihapus (jika ada).');
     // ... sisa kode CREATE TABLE IF NOT EXISTS
 
     await sql`
