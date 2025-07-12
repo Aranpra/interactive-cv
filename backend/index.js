@@ -63,10 +63,10 @@ app.post(
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded." });
     }
-    // HIGHLIGHT: Ubah ke URL relatif
+    // HIGHLIGHT: URL gambar yang diupload juga harus relatif
     profileImageUrl = `/uploads/${req.file.filename}`;
     res.json({
-      message: "Your handsome photo has been successfully updated!",
+      message: "File uploaded successfully!",
       imageUrl: profileImageUrl,
     });
   }
@@ -108,7 +108,8 @@ app.get("/api/projects", async (req, res) => {
   }
 });
 // HIGHLIGHT END
-if (require.main === module) { // Ini berarti skrip dijalankan langsung (bukan diimpor)
+if (require.main === module) {
+  // Ini berarti skrip dijalankan langsung (bukan diimpor)
   app.listen(PORT, () => {
     console.log(`Server backend berjalan di http://localhost:${PORT}`);
   });
