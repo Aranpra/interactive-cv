@@ -29,30 +29,30 @@
       "src": "frontend/index.html",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "frontend/vite.config.js"
+        "distDir": "frontend/dist" 
       }
     },
     {
-      "src": "backend/index.js",
-      "use": "@vercel/node"
+      "src": "backend/index.js", 
+      "use": "@vercel/node" 
     },
     {
-      "src": "backend/uploads/**/*",
-      "use": "@vercel/static"
+      "src": "backend/uploads/**/*", 
+      "use": "@vercel/static" 
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/index.js"
+      "dest": "/backend/index.js" 
     },
     {
-      "src": "/uploads/(.*)",
-      "dest": "/backend/uploads/$1"
+      "src": "/uploads/(.*)", 
+      "dest": "/backend/uploads/$1" 
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "dest": "/frontend/$1" 
     }
   ]
 }
