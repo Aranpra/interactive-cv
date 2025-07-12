@@ -1,40 +1,3 @@
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue' // HIGHLIGHT: Tambah onMounted, onUnmounted
-
-// HIGHLIGHT: State baru untuk mengontrol visibilitas navbar
-const hideNavbar = ref(false)
-const showNavbar = ref(true) // Default: navbar terlihat saat awal
-
-let lastScrollY = 0 // Menyimpan posisi scroll sebelumnya
-const scrollThreshold = 50 // Ambang batas scroll untuk memicu hide/show
-
-const handleScroll = () => {
-  const currentScrollY = window.scrollY
-
-  // Jika scroll ke bawah dan sudah melewati threshold awal (misal 50px dari atas)
-  if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
-    hideNavbar.value = true
-    showNavbar.value = false
-  }
-  // Jika scroll ke atas atau kembali ke atas sedikit
-  else if (currentScrollY < lastScrollY || currentScrollY <= scrollThreshold) {
-    hideNavbar.value = false
-    showNavbar.value = true
-  }
-
-  lastScrollY = currentScrollY // Update posisi scroll sebelumnya
-}
-
-// HIGHLIGHT: Daftarkan event listener saat komponen dimuat dan hapus saat tidak digunakan
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
-</script>
-
 <template>
   <header
     :class="[
@@ -58,7 +21,14 @@ onUnmounted(() => {
         </li>
         <li>
           <a
-            href="#pendidikan"
+            href="#achievements"
+            class="text-gray-600 hover:text-light-blue transform hover:-translate-y-0.5 transition-all duration-300"
+            >Pencapaian</a
+          >
+        </li>
+        <li>
+          <a
+            href="#pendidikan-dan-tentangsaya"
             class="text-gray-600 hover:text-light-blue transform hover:-translate-y-0.5 transition-all duration-300"
             >Pendidikan</a
           >
@@ -88,3 +58,32 @@ onUnmounted(() => {
     </nav>
   </header>
 </template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+const hideNavbar = ref(false)
+const showNavbar = ref(true)
+let lastScrollY = 0
+const scrollThreshold = 50
+const handleScroll = () => {
+  const currentScrollY = window.scrollY
+  if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+    hideNavbar.value = true
+    showNavbar.value = false
+  } else if (currentScrollY < lastScrollY || currentScrollY <= scrollThreshold) {
+    hideNavbar.value = false
+    showNavbar.value = true
+  }
+  lastScrollY = currentScrollY
+}
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+</script>
+
+<style scoped>
+/* Style spesifik di sini jika ada */
+</style>

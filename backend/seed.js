@@ -8,7 +8,12 @@ require("dotenv").config({
 });
 
 const { sql } = require("@vercel/postgres");
-const { educationHistory, skills, projects } = require("./data.js");
+const {
+  educationHistory,
+  skills,
+  projects,
+  achievements,
+} = require("./data.js");
 
 async function seed() {
   // HIGHLIGHT START: Pastikan TIDAK ADA deklarasi 'path' lagi di sini
@@ -19,8 +24,8 @@ async function seed() {
     // ... di dalam fungsi seed()
     console.log("Memulai proses seeding data...");
     // HIGHLIGHT: Tambahkan ini jika ingin menghapus tabel lama sebelum membuat yang baru
-    await sql`DROP TABLE IF EXISTS skills, projects, education;`;
-    console.log('Tabel lama dihapus (jika ada).');
+    await sql`DROP TABLE IF EXISTS skills, projects, education, achievements;`;
+    console.log("Tabel lama dihapus (jika ada).");
     // ... sisa kode CREATE TABLE IF NOT EXISTS
 
     await sql`
@@ -29,6 +34,14 @@ async function seed() {
         institution VARCHAR(255), 
         major VARCHAR(255), 
         period VARCHAR (255)
+      );
+    `;
+    await sql`
+      CREATE TABLE IF NOT EXISTS achievements (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255),
+        image VARCHAR(255),
+        description TEXT
       );
     `;
     await sql`
@@ -59,6 +72,14 @@ async function seed() {
       )
     );
     await Promise.all(
+      achievements.map(
+        (a) => sql`
+      INSERT INTO achievements (title, image, description)
+      VALUES (${a.title}, ${a.image}, ${a.description});
+    `
+      )
+    );
+    await Promise.all(
       skills.map(
         (s) => sql`
       INSERT INTO skills (name, level) 
@@ -75,7 +96,6 @@ async function seed() {
       )
     );
 
-    
     console.log("Proses seeding data berhasil!");
   } catch (error) {
     console.error("Error seeding:", error);

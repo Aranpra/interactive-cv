@@ -1,20 +1,3 @@
-<script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import SectionTitle from './SectionTitle.vue'
-// HIGHLIGHT START: API_URL untuk fetching data projects
-const API_URL = import.meta.env.PROD ? '/api/projects' : 'http://localhost:3000/api/projects'
-// HIGHLIGHT END
-const projects = ref([])
-onMounted(async () => {
-  try {
-    const response = await axios.get(API_URL) // HIGHLIGHT: Menggunakan API_URL
-    projects.value = response.data
-  } catch (error) {
-    console.error('Gagal mengambil data proyek:', error) // HIGHLIGHT: Log error yang lebih deskriptif
-  }
-})
-</script>
 <template>
   <section id="proyek" class="py-20 bg-white">
     <div class="container mx-auto px-6">
@@ -33,8 +16,9 @@ onMounted(async () => {
               <span
                 v-for="t in project.tech"
                 :key="t"
-                class="inlineblock bg-blue-100 text-blue-800 text-sm font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full"
-                >{{ t }}</span
+                class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full"
+              >
+                {{ t }}</span
               >
             </div>
             <a
@@ -42,7 +26,8 @@ onMounted(async () => {
               target="_blank"
               rel="noopener noreferrer"
               class="text-blue-600 font-semibold hover:underline"
-              >Lihat Detail &rarr;</a
+            >
+              Lihat Detail &rarr;</a
             >
           </div>
         </div>
@@ -50,3 +35,26 @@ onMounted(async () => {
     </div>
   </section>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import SectionTitle from './SectionTitle.vue'
+const API_URL = import.meta.env.PROD
+  ? '/api/projects'
+  : 'http://localhost:3000/api/projects'
+const projects = ref([])
+onMounted(async () => {
+  try {
+    const response = await axios.get(API_URL)
+    projects.value = response.data
+    console.log('Fetched Projects Data:', response.data)
+  } catch (error) {
+    console.error('Gagal mengambil data proyek:', error)
+  }
+})
+</script>
+
+<style scoped>
+/* Style spesifik di sini jika ada */
+</style>

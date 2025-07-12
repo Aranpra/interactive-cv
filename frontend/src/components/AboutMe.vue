@@ -20,7 +20,9 @@
       <p>
         Selama perjalanan studi saya, saya aktif mengeksplorasi berbagai teknologi seperti Vue.js
         untuk frontend yang reaktif, Node.js dengan Express.js untuk backend yang kuat, dan
-        PostgreSQL untuk manajemen basis data. Saya juga familiar dengan **Tailwind CSS** untuk
+        PostgreSQL untuk manajemen basis data.
+        Saya juga familiar dengan
+        <span class="font-bold">Tailwind CSS</span> untuk
         desain antarmuka yang cepat dan responsif.
       </p>
       <p>
@@ -44,3 +46,11 @@
     </div>
   </div>
 </template>
+
+<script setup>
+// Tidak ada logika JS di sini
+</script>
+
+<style scoped>
+/* Style spesifik di sini jika ada */
+</style>

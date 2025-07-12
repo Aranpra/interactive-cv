@@ -13,6 +13,24 @@ const educationHistory = [
     major: "MIPA",
   },
 ];
+const achievements = [
+  {
+    id: 1,
+    title: "Juara 1 Lomba Web 2024",
+    image:
+      "https://i.pinimg.com/1200x/e0/a6/a5/e0a6a54c5043d3f90a8b0981665879a3.jpg", // HIGHLIGHT: Ganti URL gambar ini
+    description:
+      "Merancang dan mengembangkan websiteinovatif untuk kompetisi tingkat universitas.",
+  },
+  {
+    id: 2,
+    title: "Sertifikasi Google IT Support",
+    image:
+      "https://i.pinimg.com/1200x/10/08/9e/10089ebef02578f435bba48e5e5c3e4b.jpg", // HIGHLIGHT: Ganti URL gambar ini
+    description:
+      "Menyelesaikan kursus komprehensif tentang dasar-dasar IT dan dukungan teknis.",
+  },
+];
 const skills = [
   { name: "Vue.js", level: "Expert" },
   { name: "JavaScript", level: "Expert" },
@@ -26,17 +44,19 @@ const skills = [
 const projects = [
   {
     title: "Website Toko Online",
-    image: "https://via.placeholder.com/500x300?text=Proyek+1",
+    image:
+      "https://i.pinimg.com/736x/a3/77/f3/a377f34362bf428d0d24722072964461.jpg",
     description: "Platform e-commerce dengan fitur keranjang belanja.",
     tech: ["Vue.js", "Express.js", "PostgreSQL"],
     link: "#",
   },
   {
     title: "Aplikasi Manajemen Tugas",
-    image: "https://via.placeholder.com/500x300?text=Proyek+2",
+    image:
+      "https://i.pinimg.com/1200x/ae/0b/0e/ae0b0e627f2743e22d4bb6e58490b695.jpg",
     description: "Aplikasi untuk melacak progres tugas harian.",
     tech: ["React", "Firebase"],
     link: "#",
   },
 ];
-module.exports = { educationHistory, skills, projects };
+module.exports = { educationHistory, achievements, skills, projects };
