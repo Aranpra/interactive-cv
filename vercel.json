@@ -1,33 +1,58 @@
 {
   "version": 2,
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
   "builds": [
+    {
+      "src": "frontend/src/views/HomeView.vue",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "frontend/vite.config.js"
+      }
+    },
     {
       "src": "backend/index.js",
       "use": "@vercel/node"
     },
     {
-      "src": "frontend/index.html", 
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "backend/uploads/**",
-      "use": "@vercel/static",
-      "config": { "maxLambdaSize": "10mb" } 
-    } 
+      "src": "backend/uploads/**/*",
+      "use": "@vercel/static"
+    }
   ],
   "routes": [
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/backend/uploads/$1"
-    },
     {
       "src": "/api/(.*)",
       "dest": "/backend/index.js"
     },
     {
+      "src": "/uploads/(.*)",
+      "dest": "/backend/uploads/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/frontend/$1"
     }
-  ] 
+  ]
 }
