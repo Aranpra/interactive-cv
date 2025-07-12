@@ -23,7 +23,7 @@ onMounted(async () => {
     <section id="pendidikan" class="py-20 bg-gray-50">
       <div class="container mx-auto px-6">
         <h3
-          class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2 animate-fade-in duration-1000"
+          class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2 animate-fade-in"
         >
           Pendidikan
         </h3>
