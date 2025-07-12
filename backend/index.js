@@ -53,7 +53,7 @@ const upload = multer({
 
 // HIGHLIGHT START: Sesuaikan URL foto profil untuk Vercel (URL relatif)
 // Ini akan membuat URL bekerja baik di lokal maupun di Vercel
-let profileImageUrl = "/uploads/default-profile.png"; // Default image URL (relatif)
+let profileImageUrl = "/uploads/default-profile.png";  // Default image URL (relatif)
 // Endpoint untuk upload foto profil
 
 app.post(
@@ -63,12 +63,13 @@ app.post(
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded." });
     }
-    // HIGHLIGHT: URL gambar yang diupload juga harus relatif
+    // HIGHLIGHT START: URL setelah upload juga harus relatif
     profileImageUrl = `/uploads/${req.file.filename}`;
     res.json({
       message: "File uploaded successfully!",
       imageUrl: profileImageUrl,
     });
+    // HIGHLIGHT END
   }
 );
 
