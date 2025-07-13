@@ -1,4 +1,11 @@
 {
-  "name": "interactive-cv-root",
-  "private": true
+  "name": "interactive-cv-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "npm run build --workspace=frontend"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
 }
