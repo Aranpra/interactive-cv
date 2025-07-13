@@ -20,10 +20,11 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
+const API_URL = `https://interactive-cv-production-1827.up.railway.app/api/skills`;
 const skills = ref([])
 onMounted(async () => {
   try {
-    const response = await axios.get(VITE_API_URL+"/api/skills")
+    const response = await axios.get(API_URL)
     skills.value = response.data
     console.log('Fetched Skills Data:', response.data)
   } catch (error) {
