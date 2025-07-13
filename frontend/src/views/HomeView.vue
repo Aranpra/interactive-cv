@@ -24,7 +24,6 @@ import Contact from '@/components/userContact.vue'
 import AboutEducationSection from '@/components/AboutEducationSection.vue'
 import Achievement from '@/components/userAchievment.vue'
 // import Loader from '@/components/webLoader.vue' // Pastikan ini diimpor jika digunakan
-import ScrollToTop from '@/components/ScrollToTop.vue' // Pastikan ini diimpor jika digunakan
 // import { ref, onMounted } from 'vue' // Untuk isLoading
 // HIGHLIGHT END
 

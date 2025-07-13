@@ -15,9 +15,6 @@
               <p class="text-gray-600 text-sm">{{ achievement.description }}</p>
             </div>
           </div>
-          <div v-if="achievements.length === 0" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-lg p-4 text-center items-center justify-center flex flex-col h-48">
-              <p class="text-gray-500">Belum ada pencapaian. Mari berkarya!</p>
-          </div>
         </div>
       </div>
     </div>
