@@ -17,20 +17,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import SectionTitle from './SectionTitle.vue'
-const API_URL = `https://interactive-cv-production-1827.up.railway.app/api/skills`;
-const skills = ref([])
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import SectionTitle from './SectionTitle.vue';
+
+const API_URL = `${import.meta.env.VITE_API_URL}/api/skills`;
+const skills = ref([]);
+
 onMounted(async () => {
   try {
-    const response = await axios.get(API_URL)
-    skills.value = response.data
-    console.log('Fetched Skills Data:', response.data)
+    const response = await axios.get(API_URL);
+    skills.value = response.data;
   } catch (error) {
-    console.error('Gagal mengambil data skill:', error)
+    console.error('Gagal mengambil data skill:', error);
   }
-})
+});
 </script>
 
 <style scoped>
