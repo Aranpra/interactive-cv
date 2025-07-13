@@ -21,7 +21,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import SectionTitle from './SectionTitle.vue';
 
-const API_URL = `https://interactive-cv-production-1827.up.railway.app/api/skills`;
+const API_URL = `/api/skills`;
 const skills = ref([]);
 
 onMounted(async () => {

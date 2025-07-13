@@ -24,7 +24,7 @@
       class="md:w-1/2 flex flex-col items-center justify-center animate-fade-in"
       style="animation-delay: 500ms"
     >
-      <div
+      <!-- <div
         class="relative group w-80 h-80 rounded-full overflow-hidden shadow-xl border-4 border-accent-blue ring-8 ring-light-blue"
         style="animation-delay: 700ms"
         @mouseenter="showOverlay = true"
@@ -49,35 +49,36 @@
             Lihat Gambar
           </button>
         </div>
-      </div>
-      <input
+      </div> -->
+      <!-- <input
         type="file"
         ref="fileInput"
         accept="image/*"
         class="hidden"
         @change="handleFileSelect"
-      />
+      /> -->
     </div>
   </section>
 
-  <div
+  <!-- <div
     v-if="showFullscreen"
     class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 z-50 flex justify-center items-center"
     @click.self="showFullscreen = false"
-  >
-    <img
+  > -->
+    <!-- <img
       :src="profileImageUrl"
       alt="Foto Profil Fullscreen"
       class="max-w-full max-h-full object-contain"
-    />
-    <button
+    /> -->
+    <!-- <button
       @click="showFullscreen = false"
       class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none"
     >
       &times;
     </button>
-  </div>
-  <div
+  </div> -->
+
+  <!-- <div
     v-if="showCropperModal"
     class="fixed inset-0 bg-black bg-opacity-90 z-[60] flex flex-col justify-center items-center p-4"
   >
@@ -131,7 +132,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
@@ -150,106 +151,106 @@ onMounted(() => {
   })
 })
 
-// HIGHLIGHT START: API Endpoint untuk mengambil/mengupload gambar profil
-const PROFILE_API_ENDPOINT = 'https://interactive-cv-production-1827.up.railway.app/api/profile-photo'
+// // HIGHLIGHT START: API Endpoint untuk mengambil/mengupload gambar profil
+// const PROFILE_API_ENDPOINT = 'http://localhost:3000/api/profile-photo'
 
-const UPLOAD_API_ENDPOINT = 'https://interactive-cv-production-1827.up.railway.app/api/upload-profile-photo'
-// HIGHLIGHT END
+// const UPLOAD_API_ENDPOINT = 'http://localhost:3000/api/upload-profile-photo'
+// // HIGHLIGHT END
 
-const profileImageUrl = ref('')
-const fileInput = ref(null)
-const showOverlay = ref(false)
-const showFullscreen = ref(false)
+// const profileImageUrl = ref('')
+// const fileInput = ref(null)
+// const showOverlay = ref(false)
+// const showFullscreen = ref(false)
 
-const showCropperModal = ref(false)
-const selectedImageSrc = ref(null)
-const cropperRef = ref(null)
+// const showCropperModal = ref(false)
+// const selectedImageSrc = ref(null)
+// const cropperRef = ref(null)
 
-const fetchProfileImage = async () => {
-  try {
-    const response = await axios.get(PROFILE_API_ENDPOINT)
-    if (response.data.imageUrl) {
-      // HIGHLIGHT START: Logika untuk setting profileImageUrl
-      if (import.meta.env.PROD) {
-        // Di produksi (Vercel), URL dari backend sudah relatif dan benar
-        profileImageUrl.value = response.data.imageUrl
-      } else {
-        // Di lokal, kita perlu URL absolut ke backend (port 3000)
-        profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}`
-      }
-      // HIGHLIGHT END
-    } else {
-      // Fallback jika API tidak memberikan URL, gunakan default kondisional
-      profileImageUrl.value = 'https://interactive-cv-production-1827.up.railway.app/api/default-profile.png'
-    }
-    console.log('Fetched Profile Image URL:', profileImageUrl.value)
-  } catch (error) {
-    console.error('Error fetching profile image:', error)
-    // Fallback jika terjadi error fetch, gunakan default kondisional
-    profileImageUrl.value = import.meta.env.PROD
-      ? '/uploads/default-profile.png'
-      : 'http://localhost:3000/uploads/default-profile.png'
-  }
-}
+// const fetchProfileImage = async () => {
+//   try {
+//     const response = await axios.get(PROFILE_API_ENDPOINT)
+//     if (response.data.imageUrl) {
+//       // HIGHLIGHT START: Logika untuk setting profileImageUrl
+//       if (import.meta.env.PROD) {
+//         // Di produksi (Vercel), URL dari backend sudah relatif dan benar
+//         profileImageUrl.value = response.data.imageUrl
+//       } else {
+//         // Di lokal, kita perlu URL absolut ke backend (port 3000)
+//         profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}`
+//       }
+//       // HIGHLIGHT END
+//     } else {
+//       // Fallback jika API tidak memberikan URL, gunakan default kondisional
+//       profileImageUrl.value = 'https://interactive-cv-production-1827.up.railway.app/api/default-profile.png'
+//     }
+//     console.log('Fetched Profile Image URL:', profileImageUrl.value)
+//   } catch (error) {
+//     console.error('Error fetching profile image:', error)
+//     // Fallback jika terjadi error fetch, gunakan default kondisional
+//     profileImageUrl.value = import.meta.env.PROD
+//       ? '/uploads/default-profile.png'
+//       : 'http://localhost:3000/uploads/default-profile.png'
+//   }
+// }
 
-const handleFileSelect = (event) => {
-  const file = event.target.files?.[0]
-  if (!file) return // HIGHLIGHT: Tambah cek file null
+// const handleFileSelect = (event) => {
+//   const file = event.target.files?.[0]
+//   if (!file) return // HIGHLIGHT: Tambah cek file null
 
-  const reader = new FileReader()
-  reader.onload = (e) => {
-    selectedImageSrc.value = e.target.result
-    showCropperModal.value = true
-  }
-  reader.readAsDataURL(file)
-  event.target.value = null
-}
+//   const reader = new FileReader()
+//   reader.onload = (e) => {
+//     selectedImageSrc.value = e.target.result
+//     showCropperModal.value = true
+//   }
+//   reader.readAsDataURL(file)
+//   event.target.value = null
+// }
 
-const cropAndUpload = async () => {
-  if (!cropperRef.value) return
+// const cropAndUpload = async () => {
+//   if (!cropperRef.value) return
 
-  const { canvas } = cropperRef.value.getResult()
-  if (!canvas) {
-    alert('Failed to crop image.')
-    return
-  }
+//   const { canvas } = cropperRef.value.getResult()
+//   if (!canvas) {
+//     alert('Failed to crop image.')
+//     return
+//   }
 
-  canvas.toBlob(async (blob) => {
-    if (!blob) {
-      alert('Failed to convert cropped image to blob.')
-      return
-    }
+//   canvas.toBlob(async (blob) => {
+//     if (!blob) {
+//       alert('Failed to convert cropped image to blob.')
+//       return
+//     }
 
-    const formData = new FormData()
-    formData.append('profilePhoto', blob, 'profile_cropped.png')
-    try {
-      const response = await axios.post(UPLOAD_API_ENDPOINT, formData, {
-        // HIGHLIGHT: Gunakan UPLOAD_API_ENDPOINT
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      // HIGHLIGHT START: Logika untuk setting profileImageUrl setelah upload
-      if (import.meta.env.PROD) {
-        profileImageUrl.value = response.data.imageUrl // Dari backend sudah relatif dan benar
-      } else {
-        profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}` // Perlu absolut di lokal
-      }
-      // HIGHLIGHT END
-      alert(response.data.message)
-      showCropperModal.value = false
-      selectedImageSrc.value = null
-      console.log('Upload success, new URL:', profileImageUrl.value)
-    } catch (error) {
-      console.error('Error uploading cropped file:', error)
-      alert('File upload failed: ' + (error.response?.data?.message || error.message))
-    }
-  }, 'image/png')
-}
+//     const formData = new FormData()
+//     formData.append('profilePhoto', blob, 'profile_cropped.png')
+//     try {
+//       const response = await axios.post(UPLOAD_API_ENDPOINT, formData, {
+//         // HIGHLIGHT: Gunakan UPLOAD_API_ENDPOINT
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//         },
+//       })
+//       // HIGHLIGHT START: Logika untuk setting profileImageUrl setelah upload
+//       if (import.meta.env.PROD) {
+//         profileImageUrl.value = response.data.imageUrl // Dari backend sudah relatif dan benar
+//       } else {
+//         profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}` // Perlu absolut di lokal
+//       }
+//       // HIGHLIGHT END
+//       alert(response.data.message)
+//       showCropperModal.value = false
+//       selectedImageSrc.value = null
+//       console.log('Upload success, new URL:', profileImageUrl.value)
+//     } catch (error) {
+//       console.error('Error uploading cropped file:', error)
+//       alert('File upload failed: ' + (error.response?.data?.message || error.message))
+//     }
+//   }, 'image/png')
+// }
 
-onMounted(() => {
-  fetchProfileImage()
-})
+// onMounted(() => {
+//   fetchProfileImage()
+// })
 </script>
 
 <style>

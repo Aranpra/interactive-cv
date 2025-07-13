@@ -26,15 +26,12 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import SectionTitle from './SectionTitle.vue';
 
-// HIGHLIGHT START: API URL untuk fetching data achievements
-const API_URL = `https://interactive-cv-production-1827.up.railway.app/api/achievements`;
-// HIGHLIGHT END
-
 const achievements = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get("/api/achievements");
+    console.log(response)
     achievements.value = response.data;
     console.log('Fetched Achievements Data:', response.data);
   } catch (error) {
