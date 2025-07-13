@@ -151,13 +151,9 @@ onMounted(() => {
 })
 
 // HIGHLIGHT START: API Endpoint untuk mengambil/mengupload gambar profil
-const PROFILE_API_ENDPOINT = import.meta.env.PROD
-  ? '/api/profile-photo'
-  : 'http://localhost:3000/api/profile-photo'
+const PROFILE_API_ENDPOINT = 'https://interactive-cv-production-1827.up.railway.app/api/profile-photo'
 
-const UPLOAD_API_ENDPOINT = import.meta.env.PROD
-  ? '/api/upload-profile-photo'
-  : 'http://localhost:3000/api/upload-profile-photo'
+const UPLOAD_API_ENDPOINT = 'https://interactive-cv-production-1827.up.railway.app/api/upload-profile-photo'
 // HIGHLIGHT END
 
 const profileImageUrl = ref('')
@@ -179,14 +175,12 @@ const fetchProfileImage = async () => {
         profileImageUrl.value = response.data.imageUrl
       } else {
         // Di lokal, kita perlu URL absolut ke backend (port 3000)
-        profileImageUrl.value = `http://localhost:3000${response.data.imageUrl}`
+        profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}`
       }
       // HIGHLIGHT END
     } else {
       // Fallback jika API tidak memberikan URL, gunakan default kondisional
-      profileImageUrl.value = import.meta.env.PROD
-        ? '/uploads/default-profile.png'
-        : 'http://localhost:3000/uploads/default-profile.png'
+      profileImageUrl.value = 'https://interactive-cv-production-1827.up.railway.app/api/default-profile.png'
     }
     console.log('Fetched Profile Image URL:', profileImageUrl.value)
   } catch (error) {
@@ -239,7 +233,7 @@ const cropAndUpload = async () => {
       if (import.meta.env.PROD) {
         profileImageUrl.value = response.data.imageUrl // Dari backend sudah relatif dan benar
       } else {
-        profileImageUrl.value = `http://localhost:3000${response.data.imageUrl}` // Perlu absolut di lokal
+        profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}` // Perlu absolut di lokal
       }
       // HIGHLIGHT END
       alert(response.data.message)

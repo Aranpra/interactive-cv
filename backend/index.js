@@ -19,12 +19,7 @@ console.log(
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173", // Izinkan dari Vercel atau lokal
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
+app.use(cors);
 app.use(express.json()); // HIGHLIGHT: Parser JSON, tapi ini TIDAK UNTUK multipart/form-data
 app.use(express.urlencoded({ extended: true }));
 

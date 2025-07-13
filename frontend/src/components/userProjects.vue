@@ -40,7 +40,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
-const API_URL = `${import.meta.env.VITE_API_URL}/projects`;
+const API_URL = `https://interactive-cv-production-1827.up.railway.app/api/projects`;
 const projects = ref([])
 onMounted(async () => {
   try {
