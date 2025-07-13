@@ -19,8 +19,21 @@ console.log(
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Ambil daftar origin yang diizinkan dari environment variable, lalu pecah menjadi array
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
+  : [];
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173", // Izinkan dari Vercel atau lokal
+  origin: (origin, callback) => {
+    // Izinkan jika origin (alamat frontend yang meminta) ada di dalam daftar kita,
+    // atau jika tidak ada origin sama sekali (misalnya dari Postman atau aplikasi lain)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   optionsSuccessStatus: 200,
 };
 
