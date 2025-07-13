@@ -50,11 +50,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-const API_URL = `https://interactive-cv-production-1827.up.railway.app/api/education`;
 const educationHistory = ref([])
 onMounted(async () => {
   try {
-    const response = await axios.get(API_URL)
+    const response = await axios.get(VITE_API_URL+"/api/education")
     educationHistory.value = response.data
     console.log('Fetched Education Data:', response.data)
   } catch (error) {

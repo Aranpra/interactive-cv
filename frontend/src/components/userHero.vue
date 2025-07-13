@@ -151,9 +151,6 @@ onMounted(() => {
 })
 
 // HIGHLIGHT START: API Endpoint untuk mengambil/mengupload gambar profil
-const PROFILE_API_ENDPOINT = 'https://interactive-cv-production-1827.up.railway.app/api/profile-photo'
-
-const UPLOAD_API_ENDPOINT = 'https://interactive-cv-production-1827.up.railway.app/api/upload-profile-photo'
 // HIGHLIGHT END
 
 const profileImageUrl = ref('')
@@ -167,7 +164,7 @@ const cropperRef = ref(null)
 
 const fetchProfileImage = async () => {
   try {
-    const response = await axios.get(PROFILE_API_ENDPOINT)
+    const response = await axios.get(process.env.VITE_API_URL+"/api/profile-photo")
     if (response.data.imageUrl) {
       // HIGHLIGHT START: Logika untuk setting profileImageUrl
       if (import.meta.env.PROD) {
@@ -175,12 +172,12 @@ const fetchProfileImage = async () => {
         profileImageUrl.value = response.data.imageUrl
       } else {
         // Di lokal, kita perlu URL absolut ke backend (port 3000)
-        profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}`
+        profileImageUrl.value = `${process.env.VITE_API_URL}${response.data.imageUrl}`
       }
       // HIGHLIGHT END
     } else {
       // Fallback jika API tidak memberikan URL, gunakan default kondisional
-      profileImageUrl.value = 'https://interactive-cv-production-1827.up.railway.app/api/default-profile.png'
+      profileImageUrl.value = `${process.env.VITE_API_URL}+/api/default-profile.png`
     }
     console.log('Fetched Profile Image URL:', profileImageUrl.value)
   } catch (error) {
