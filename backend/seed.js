@@ -3,9 +3,11 @@
 const path = require("path");
 // HIGHLIGHT END
 
-require("dotenv").config({
-  path: path.resolve(__dirname, "..", ".env.development.local"),
-});
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({
+    path: path.resolve(__dirname, "..", ".env.development.local"),
+  });
+}
 
 const { sql } = require("@vercel/postgres");
 const {

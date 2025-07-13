@@ -1,26 +1,23 @@
 // backend/index.js
 const path = require("path");
-console.log(
-  "Loading .env from:",
-  path.resolve(__dirname, "..", ".env.development.local")
-);
-require("dotenv").config({
-  path: path.resolve(__dirname, "..", ".env.development.local"),
-});
-console.log(
-  "POSTGRES_URL loaded:",
-  process.env.POSTGRES_URL ? "Yes (value hidden)" : "No"
-);
-
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const { sql } = require("@vercel/postgres");
 
-const app = express();
-const PORT = 3000;
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({
+    path: path.resolve(__dirname, "..", ".env.development.local"),
+  });
+}
 
-let dbInitialized = false;
+console.log(
+  "POSTGRES_URL loaded:",
+  process.env.POSTGRES_URL ? "Yes (value hidden)" : "No"
+);
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json()); // HIGHLIGHT: Parser JSON, tapi ini TIDAK UNTUK multipart/form-data

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <Loader :loading="isLoading" /> <Navbar /> -->
-     <Navbar />
+    <Navbar />
     <main>
       <Hero />
       <div v-animate-on-scroll class="group"><AboutEducationSection /></div>
@@ -10,7 +10,6 @@
       <div v-animate-on-scroll class="group"><Projects /></div>
       <div v-animate-on-scroll class="group"><Contact /></div>
     </main>
-    <ScrollToTop />
   </div>
 </template>
 
