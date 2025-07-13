@@ -26,7 +26,7 @@ async function seed() {
     // ... di dalam fungsi seed()
     console.log("Memulai proses seeding data...");
     // HIGHLIGHT: Tambahkan ini jika ingin menghapus tabel lama sebelum membuat yang baru
-    await sql`DROP TABLE IF EXISTS skills, projects, education, achievements;`;
+    await sql`DROP TABLE IF EXISTS skills, projects, education, achievements, aboutme;`;
     console.log("Tabel lama dihapus (jika ada).");
     // ... sisa kode CREATE TABLE IF NOT EXISTS
 
@@ -63,7 +63,18 @@ async function seed() {
         link VARCHAR(255)
       );
     `;
+    await sql`
+      CREATE TABLE IF NOT EXISTS aboutme (
+        id SERIAL PRIMARY KEY,
+        content TEXT not null
+      );
+      `;
+
     console.log("Tabel berhasil dibuat.");
+
+    await sql`
+      INSERT INTO aboutme (id, content) VALUES (1, 'Saya adalah seorang mahasiswa Informatika yang sedang menempuh pendidikan di Universitas. Saya memiliki minat yang besar dalam pengembangan perangkat lunak dan teknologi informasi. Selain itu, saya juga aktif dalam berbagai kegiatan organisasi kampus dan memiliki pengalaman dalam proyek-proyek pengembangan aplikasi web.');
+    `;
 
     await Promise.all(
       educationHistory.map(

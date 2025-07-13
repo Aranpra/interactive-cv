@@ -118,6 +118,19 @@ app.get("/api/education", async (req, res) => {
   }
 });
 
+app.get("api/aboutme", async (req, res) => {
+  try {
+    const { rows } = await sql`SELECT * FROM aboutme WHERE id = 1;`;
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Data About Me tidak ditemukan." });
+    }
+    res.status(200).json({ aboutMeText: rows[0].content });
+  } catch (error) {
+    console.error("API Error: Gagal mengambil data About Me:", error);
+    res.status(500).json({ error: "Gagal mengambil data dari database." });
+  }
+});
+
 app.get("/api/skills", async (req, res) => {
   console.log("API: /api/skills called");
   try {

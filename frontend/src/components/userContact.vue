@@ -1,7 +1,7 @@
 <template>
   <footer id="kontak" class="py-20 bg-gray-800" textColor="#ffffff">
     <div class="container mx-auto px-6 text-center">
-      <SectionTitle title="Kontak" textColor="#ffffff" lineColor="#ffffff" />
+      <SectionTitle title="Kontak" />
       <p class="text-xl text-gray-300 mb-8">Jangan ragu untuk terhubung atau bertanya.</p>
       <a
         href="mailto:emailanda@example.com"

@@ -2,14 +2,14 @@
   <section id="profil" class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
     <div class="md:w-1/2 mb-10 md:mb-0">
       <h1
-        class="text-5xl font-bold text-gray-800 mb-4 animate-slide-in-left"
+        class="text-4xl font-bold text-gray-800 mb-4 animate-slide-in-left"
         style="animation-delay: 200ms"
       >
         Halo, Saya<br />
         <span class="text-accent-blue">Arya Andrean Pratama<br /></span>
         <span id="typed" class="text-blue-400"></span>
       </h1>
-      <p class="text-xl text-gray-600 mb-8 animate-slide-in-left" style="animation-delay: 400ms">
+      <p class="text-l text-gray-600 mb-8 animate-slide-in-left" style="animation-delay: 400ms">
         Mahasiswa Teknik Informatika yang bersemangat dalam pengembangan web dan desain antarmuka.
       </p>
       <a
@@ -24,12 +24,14 @@
       class="md:w-1/2 flex flex-col items-center justify-center animate-fade-in"
       style="animation-delay: 500ms"
     >
-      <!-- <div
+
+      <div
         class="relative group w-80 h-80 rounded-full overflow-hidden shadow-xl border-4 border-accent-blue ring-8 ring-light-blue"
         style="animation-delay: 700ms"
         @mouseenter="showOverlay = true"
         @mouseleave="showOverlay = false"
-      >
+      > <img src="./public/default-profile.png" alt="Foto Profil" class="w-80 h-80 rounded-full object-cover shadow-lg"> </div>
+      <!--
         <img :src="profileImageUrl" alt="Foto Profil" class="w-full h-full object-cover" />
 
         <div
@@ -151,123 +153,8 @@ onMounted(() => {
   })
 })
 
-// // HIGHLIGHT START: API Endpoint untuk mengambil/mengupload gambar profil
-// const PROFILE_API_ENDPOINT = 'http://localhost:3000/api/profile-photo'
-
-// const UPLOAD_API_ENDPOINT = 'http://localhost:3000/api/upload-profile-photo'
-// // HIGHLIGHT END
-
-// const profileImageUrl = ref('')
-// const fileInput = ref(null)
-// const showOverlay = ref(false)
-// const showFullscreen = ref(false)
-
-// const showCropperModal = ref(false)
-// const selectedImageSrc = ref(null)
-// const cropperRef = ref(null)
-
-// const fetchProfileImage = async () => {
-//   try {
-//     const response = await axios.get(PROFILE_API_ENDPOINT)
-//     if (response.data.imageUrl) {
-//       // HIGHLIGHT START: Logika untuk setting profileImageUrl
-//       if (import.meta.env.PROD) {
-//         // Di produksi (Vercel), URL dari backend sudah relatif dan benar
-//         profileImageUrl.value = response.data.imageUrl
-//       } else {
-//         // Di lokal, kita perlu URL absolut ke backend (port 3000)
-//         profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}`
-//       }
-//       // HIGHLIGHT END
-//     } else {
-//       // Fallback jika API tidak memberikan URL, gunakan default kondisional
-//       profileImageUrl.value = 'https://interactive-cv-production-1827.up.railway.app/api/default-profile.png'
-//     }
-//     console.log('Fetched Profile Image URL:', profileImageUrl.value)
-//   } catch (error) {
-//     console.error('Error fetching profile image:', error)
-//     // Fallback jika terjadi error fetch, gunakan default kondisional
-//     profileImageUrl.value = import.meta.env.PROD
-//       ? '/uploads/default-profile.png'
-//       : 'http://localhost:3000/uploads/default-profile.png'
-//   }
-// }
-
-// const handleFileSelect = (event) => {
-//   const file = event.target.files?.[0]
-//   if (!file) return // HIGHLIGHT: Tambah cek file null
-
-//   const reader = new FileReader()
-//   reader.onload = (e) => {
-//     selectedImageSrc.value = e.target.result
-//     showCropperModal.value = true
-//   }
-//   reader.readAsDataURL(file)
-//   event.target.value = null
-// }
-
-// const cropAndUpload = async () => {
-//   if (!cropperRef.value) return
-
-//   const { canvas } = cropperRef.value.getResult()
-//   if (!canvas) {
-//     alert('Failed to crop image.')
-//     return
-//   }
-
-//   canvas.toBlob(async (blob) => {
-//     if (!blob) {
-//       alert('Failed to convert cropped image to blob.')
-//       return
-//     }
-
-//     const formData = new FormData()
-//     formData.append('profilePhoto', blob, 'profile_cropped.png')
-//     try {
-//       const response = await axios.post(UPLOAD_API_ENDPOINT, formData, {
-//         // HIGHLIGHT: Gunakan UPLOAD_API_ENDPOINT
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       })
-//       // HIGHLIGHT START: Logika untuk setting profileImageUrl setelah upload
-//       if (import.meta.env.PROD) {
-//         profileImageUrl.value = response.data.imageUrl // Dari backend sudah relatif dan benar
-//       } else {
-//         profileImageUrl.value = `https://interactive-cv-production-1827.up.railway.app${response.data.imageUrl}` // Perlu absolut di lokal
-//       }
-//       // HIGHLIGHT END
-//       alert(response.data.message)
-//       showCropperModal.value = false
-//       selectedImageSrc.value = null
-//       console.log('Upload success, new URL:', profileImageUrl.value)
-//     } catch (error) {
-//       console.error('Error uploading cropped file:', error)
-//       alert('File upload failed: ' + (error.response?.data?.message || error.message))
-//     }
-//   }, 'image/png')
-// }
-
-// onMounted(() => {
-//   fetchProfileImage()
-// })
 </script>
 
 <style>
 /* Style tetap ada di sini */
-.group .bg-opacity-50 {
-  opacity: 0;
-}
-
-.group:hover .bg-opacity-50 {
-  opacity: 1;
-}
-
-.cropper-custom {
-  max-height: 100%;
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  background: #eee;
-}
 </style>

@@ -17,19 +17,6 @@
         user-friendly. Saya percaya bahwa teknologi dapat menjadi jembatan untuk memecahkan masalah
         sehari-hari dan memberikan dampak positif.
       </p>
-      <p>
-        Selama perjalanan studi saya, saya aktif mengeksplorasi berbagai teknologi seperti Vue.js
-        untuk frontend yang reaktif, Node.js dengan Express.js untuk backend yang kuat, dan
-        PostgreSQL untuk manajemen basis data.
-        Saya juga familiar dengan
-        <span class="font-bold">Tailwind CSS</span> untuk
-        desain antarmuka yang cepat dan responsif.
-      </p>
-      <p>
-        Saya adalah pembelajar yang cepat, selalu termotivasi untuk menguasai teknologi baru dan
-        menghadapi tantangan kompleks. Saya juga senang berkolaborasi dalam tim dan berbagi
-        pengetahuan.
-      </p>
     </div>
 
     <div class="mt-6">
