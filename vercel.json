@@ -1,34 +1,59 @@
+
 {
   "version": 2,
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
   "builds": [
     {
-      "src": "frontend/index.html",
+      "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "frontend/dist"
+        "outputDirectory": "frontend/dist"
       }
     },
     {
-      "src": "backend/index.js",
+      "src": "backend/index.js", 
       "use": "@vercel/node"
     },
     {
-      "src": "backend/uploads/**/*",
+      "src": "backend/uploads/**/*", 
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/index.js"
+      "dest": "/backend/index.js" 
     },
     {
       "src": "/uploads/(.*)",
-      "dest": "/backend/uploads/$1"
+      "dest": "/backend/uploads/$1" 
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "dest": "/frontend/$1" 
     }
   ]
 }
