@@ -44,7 +44,7 @@ import SectionTitle from './SectionTitle.vue'
 const projects = ref([])
 onMounted(async () => {
   try {
-    const response = await axios.get("/api/projects")
+    const response = await axios.get("https://interactive-cv-production-1827.up.railway.app/api/projects")
     projects.value = response.data
     console.log('Fetched Projects Data:', response.data)
   } catch (error) {

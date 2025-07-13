@@ -30,7 +30,7 @@ const achievements = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get("/api/achievements");
+    const response = await axios.get("https://interactive-cv-production-1827.up.railway.app/api/achievements");
     console.log(response)
     achievements.value = response.data;
     console.log('Fetched Achievements Data:', response.data);
