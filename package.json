@@ -1,12 +1,4 @@
 {
-  "name": "interactive-cv-monorepo",
-  "private": true,
-  "scripts": {
-    "build": "npm run build --workspace=frontend",
-    "vercel-build": "npm run build --workspace=frontend"
-  },
-  "workspaces": [
-    "frontend",
-    "backend"
-  ]
+  "name": "interactive-cv-root",
+  "private": true
 }
