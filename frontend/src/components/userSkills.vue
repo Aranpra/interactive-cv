@@ -20,7 +20,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
-const API_URL = import.meta.env.PROD ? '/api/skills' : 'http://localhost:3000/api/skills'
+const API_URL = `${import.meta.env.VITE_API_URL}/skills`;
 const skills = ref([])
 onMounted(async () => {
   try {

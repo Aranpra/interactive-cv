@@ -79,6 +79,10 @@ app.post(
   }
 );
 
+app.get("/", (req, res) => {
+  res.send("Hallo dunia! Backend server is running.");
+});
+
 app.get("/api/profile-photo", (req, res) => {
   console.log("API: /api/profile-photo called");
   res.json({ imageUrl: profileImageUrl });

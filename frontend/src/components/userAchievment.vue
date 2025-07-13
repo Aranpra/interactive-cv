@@ -27,7 +27,7 @@ import axios from 'axios';
 import SectionTitle from './SectionTitle.vue';
 
 // HIGHLIGHT START: API URL untuk fetching data achievements
-const API_URL = import.meta.env.PROD ? '/api/achievements' : 'http://localhost:3000/api/achievements';
+const API_URL = `${import.meta.env.VITE_API_URL}/achievements`;
 // HIGHLIGHT END
 
 const achievements = ref([]);

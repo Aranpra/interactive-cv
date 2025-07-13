@@ -50,7 +50,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-const API_URL = import.meta.env.PROD ? '/api/education' : 'http://localhost:3000/api/education'
+const API_URL = `${import.meta.env.VITE_API_URL}/education`;
 const educationHistory = ref([])
 onMounted(async () => {
   try {
