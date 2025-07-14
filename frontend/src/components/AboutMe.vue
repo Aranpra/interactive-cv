@@ -36,18 +36,7 @@ onMounted(async () => {
     const response = await axios.get(
       'https://interactive-cv-production-1827.up.railway.app/api/aboutme',
     )
-    const processedData = response.data.map((item) => {
-      if (item.interests && typeof item.interests === 'string') {
-        try {
-          item.interests = JSON.parse(item.interests)
-        } catch (e) {
-          console.error('Gagal membuka brankas JSON:', item.interests, e)
-          item.interests = []
-        }
-      }
-      return item
-    })
-    aboutme.value = processedData.data
+    aboutme.value = response.data
     console.log('Fetched AboutMe Data:', response.data)
   } catch (error) {
     console.error('Gagal mengambil data Tentang sasya:', error)
