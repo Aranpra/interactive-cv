@@ -41,12 +41,11 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* Utility class untuk menyembunyikan scrollbar di beberapa browser */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
+  display: none; 
 }
 </style>

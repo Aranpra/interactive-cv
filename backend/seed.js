@@ -44,7 +44,8 @@ async function seed() {
       CREATE TABLE IF NOT EXISTS skills (
         id SERIAL PRIMARY KEY, 
         name VARCHAR(255), 
-        level VARCHAR(255)
+        level VARCHAR(255),
+        iconUrl VARCHAR(255)
       );
     `;
     await sql`
@@ -60,12 +61,9 @@ async function seed() {
     await sql`
       CREATE TABLE IF NOT EXISTS aboutme (
         id SERIAL PRIMARY KEY,
-        content TEXT not null
+        content TEXT not null,
+        interests jsonb
       );
-    `;
-
-    await sql`
-      ALTER TABLE aboutme ADD COLUMN IF NOT EXISTS interests jsonb;
     `;
 
     console.log("Tabel berhasil dibuat.");
@@ -89,8 +87,8 @@ async function seed() {
     await Promise.all(
       skills.map(
         (s) => sql`
-      INSERT INTO skills (name, level) 
-      VALUES (${s.name}, ${s.level});
+      INSERT INTO skills (name, level, iconUrl) 
+      VALUES (${s.name}, ${s.level}, ${s.iconUrl});
     `
       )
     );

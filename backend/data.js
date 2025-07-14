@@ -45,23 +45,23 @@ const achievements = [
   },
 ];
 const skills = [
-  { name: "Vue.js", level: "Expert" },
-  { name: "JavaScript", level: "Expert" },
-  { name: "Tailwind CSS", level: "Expert" },
-  { name: "Node.js", level: "Expert" },
-  { name: "Express.js", level: "Expert" },
-  { name: "PostgreSQL", level: "Expert" },
-  { name: "Git & GitHub", level: "Expert" },
-  { name: "HTML5 & CSS3", level: "Expert" },
+  { name: "Vue.js", level: "Expert", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" },
+  { name: "JavaScript", level: "Expert", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+  { name: "Tailwind CSS", level: "Expert", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+  { name: "Node.js", level: "Expert", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg" },
+  { name: "Express.js", level: "Expert", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg" },
+  { name: "PostgreSQL", level: "Expert", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+  { name: "Git & GitHub", level: "Expert", iconUrl: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" },
+  { name: "HTML5 & CSS3", level: "Expert", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
 ];
 const projects = [
   {
-    title: "Website Toko Online",
+    title: "Interactive CV",
     image:
       "https://i.pinimg.com/736x/a3/77/f3/a377f34362bf428d0d24722072964461.jpg",
     description: "Platform e-commerce dengan fitur keranjang belanja.",
     tech: ["Vue.js", "Express.js", "PostgreSQL"],
-    link: "#",
+    link: "https://github.com/Aranpra/interactive-cv",
   },
   {
     title: "Aplikasi Manajemen Tugas",

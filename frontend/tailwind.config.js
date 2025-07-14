@@ -49,7 +49,7 @@ export default {
       animation: {
         'slide-in-left': 'slide-in-left 0.7s ease-out forwards',
         'slide-in-right': 'slide-in-right 0.7s ease-out forwards', // HIGHLIGHT: Syntax diperbaiki
-        'fade-in': 'fade-in 0.5s ease-out forwards',
+        'fade-in': 'fade-in 2s ease-out forwards',
         'pop-in': 'pop-in 0.6s ease-out forwards', // Panggil animasi baru
         'swing-in-top': 'swing-in-top 0.8s ease-out forwards', // Panggil animasi baru // HIGHLIGHT: Syntax diperbaiki
         'bounce-reverse': 'bounce-reverse 1s infinite', // HIGHLIGHT: Tambahkan animasi bounce-reverse

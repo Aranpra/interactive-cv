@@ -8,6 +8,11 @@
           :key="skill.name"
           class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl"
         >
+          <img
+          :src="skill.iconUrl"
+          :alt="skill.name + ' icon'"
+          class="w-16 h-16 mx-auto mb-4"
+          />
           <h3 class="text-xl font-bold text-gray-800">{{ skill.name }}</h3>
           <p class="text-gray-500 mt-2">{{ skill.level }}</p>
         </div>

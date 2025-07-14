@@ -10,12 +10,11 @@ defineProps({
   title: String,
   textColor: {
     type: String,
-    default: '', // Default warna teks gelap
+    default: '',
   },
   lineColor: {
-    // HIGHLIGHT: Tambahkan prop untuk warna garis
     type: String,
-    default: '#2563EB', // Default blue-600
+    default: '#2563EB',
   },
 })
 </script>
@@ -43,8 +42,6 @@ defineProps({
   border-radius: 9999px;
 }
 
-/* HIGHLIGHT START: Ubah selektor CSS untuk hover */
-/* Sekarang, garis akan memanjang ketika *parent* dengan kelas 'group' di-hover */
 .group:hover .animated-underline::after {
   width: 150%;
 }
