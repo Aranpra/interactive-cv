@@ -13,12 +13,25 @@ const educationHistory = [
     major: "MIPA",
   },
 ];
+const aboutme = [
+  {
+    content:
+      "Saya adalah mahasiswa Teknik Informatika di Universitas Amikom Yogyakarta. Saya memiliki minat yang besar dalam pengembangan web dan aplikasi, serta bersemangat untuk terus belajar dan mengembangkan keterampilan saya di bidang teknologi informasi.",
+    interests: [
+      "Eksplorasi teknologi baru & framework",
+      "Bermain musik",
+      "Badminton",
+      "Bermain Mobile Legend",
+      "Mendengarkan musik",
+    ],
+  },
+];
 const achievements = [
   {
     id: 1,
     title: "Juara 1 Lomba Web 2024",
     image:
-      "https://i.pinimg.com/1200x/e0/a6/a5/e0a6a54c5043d3f90a8b0981665879a3.jpg", // HIGHLIGHT: Ganti URL gambar ini
+      "https://i.pinimg.com/1200x/e0/a6/a5/e0a6a54c5043d3f90a8b0981665879a3.jpg",
     description:
       "Merancang dan mengembangkan websiteinovatif untuk kompetisi tingkat universitas.",
   },
@@ -26,7 +39,7 @@ const achievements = [
     id: 2,
     title: "Sertifikasi Google IT Support",
     image:
-      "https://i.pinimg.com/1200x/10/08/9e/10089ebef02578f435bba48e5e5c3e4b.jpg", // HIGHLIGHT: Ganti URL gambar ini
+      "https://i.pinimg.com/1200x/10/08/9e/10089ebef02578f435bba48e5e5c3e4b.jpg",
     description:
       "Menyelesaikan kursus komprehensif tentang dasar-dasar IT dan dukungan teknis.",
   },
@@ -59,4 +72,4 @@ const projects = [
     link: "#",
   },
 ];
-module.exports = { educationHistory, achievements, skills, projects };
+module.exports = { educationHistory, achievements, skills, projects, aboutme };

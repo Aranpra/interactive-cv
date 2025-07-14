@@ -5,37 +5,54 @@
     >
       Tentang Saya
     </h3>
-
-    <div class="space-y-4 text-gray-700 flex-grow animate-fade-in duration-700">
-      <p>
-        Halo! Saya seorang mahasiswa Teknik Informatika angkatan 2023 dari Universitas Amikom
-        Yogyakarta (NIM: 23.11.5739). Saya sangat antusias dalam dunia pengembangan perangkat lunak,
-        terutama di bidang pengembangan web full-stack.
+    <div
+      v-for="(about, index) in aboutme"
+      :key="index"
+      v-animate-on-scroll
+      class="mb-8 transition-all duration-700 opacity-0"
+    >
+      <p class="text-gray-700 leading-relaxed text-justify mb-4">
+        {{ about.content }}
       </p>
-      <p>
-        Saya memiliki minat yang besar dalam menciptakan solusi digital yang efisien, intuitif, dan
-        user-friendly. Saya percaya bahwa teknologi dapat menjadi jembatan untuk memecahkan masalah
-        sehari-hari dan memberikan dampak positif.
-      </p>
-    </div>
-
-    <div class="mt-6">
-      <h4 class="text-xl font-semibold text-gray-800 mb-3 animate-fade-in duration-700">
-        Minat & Hobi
-      </h4>
-      <ul class="list-disc list-inside text-gray-600 animate-fade-in duration-700">
-        <li>Eksplorasi teknologi baru & framework</li>
-        <li>Mengembangkan proyek pribadi</li>
-        <li>Belajar UI/UX Design</li>
-        <li>Bermain Mobile Legend</li>
-        <li>Mendengarkan musik</li>
-      </ul>
+      <div class="mt-6">
+        <h4 class="text-xl font-semibold text-gray-800 mb-3 animate-fade-in duration-700">
+          Minat & Hobi
+        </h4>
+        <ul class="list-disc list-inside text-gray-600 animate-fade-in duration-700">
+          <li v-for="(hobby, i) in about.interests" :key="i">{{ hobby }}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// Tidak ada logika JS di sini
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+
+const aboutme = ref([])
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      'https://interactive-cv-production-1827.up.railway.app/api/aboutme',
+    )
+    const processedData = response.data.map((item) => {
+      if (item.interests && typeof item.interests === 'string') {
+        try {
+          item.interests = JSON.parse(item.interests)
+        } catch (e) {
+          console.error('Gagal membuka brankas JSON:', item.interests, e)
+          item.interests = []
+        }
+      }
+      return item
+    })
+    aboutme.value = processedData.data
+    console.log('Fetched AboutMe Data:', response.data)
+  } catch (error) {
+    console.error('Gagal mengambil data Tentang sasya:', error)
+  }
+})
 </script>
 
 <style scoped>

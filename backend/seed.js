@@ -1,7 +1,6 @@
-// File: backend/seed.js
-// HIGHLIGHT START: Pastikan hanya ada SATU deklarasi 'path'
+
 const path = require("path");
-// HIGHLIGHT END
+
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({
@@ -15,20 +14,15 @@ const {
   skills,
   projects,
   achievements,
+  aboutme,
 } = require("./data.js");
 
 async function seed() {
-  // HIGHLIGHT START: Pastikan TIDAK ADA deklarasi 'path' lagi di sini
-  // const path = require('path'); // Jika ada baris ini di sini, HAPUS!
-  // HIGHLIGHT END
 
   try {
-    // ... di dalam fungsi seed()
     console.log("Memulai proses seeding data...");
-    // HIGHLIGHT: Tambahkan ini jika ingin menghapus tabel lama sebelum membuat yang baru
     await sql`DROP TABLE IF EXISTS skills, projects, education, achievements, aboutme;`;
     console.log("Tabel lama dihapus (jika ada).");
-    // ... sisa kode CREATE TABLE IF NOT EXISTS
 
     await sql`
       CREATE TABLE IF NOT EXISTS education (
@@ -68,13 +62,13 @@ async function seed() {
         id SERIAL PRIMARY KEY,
         content TEXT not null
       );
-      `;
-
-    console.log("Tabel berhasil dibuat.");
+    `;
 
     await sql`
-      INSERT INTO aboutme (id, content) VALUES (1, 'Saya adalah seorang mahasiswa Informatika yang sedang menempuh pendidikan di Universitas. Saya memiliki minat yang besar dalam pengembangan perangkat lunak dan teknologi informasi. Selain itu, saya juga aktif dalam berbagai kegiatan organisasi kampus dan memiliki pengalaman dalam proyek-proyek pengembangan aplikasi web.');
+      ALTER TABLE aboutme ADD COLUMN IF NOT EXISTS interests jsonb;
     `;
+
+    console.log("Tabel berhasil dibuat.");
 
     await Promise.all(
       educationHistory.map(
@@ -105,6 +99,14 @@ async function seed() {
         (p) => sql`
       INSERT INTO projects (title, image, description, tech, link) 
       VALUES (${p.title}, ${p.image}, ${p.description}, ${p.tech}, ${p.link});
+    `
+      )
+    );
+    await Promise.all(
+      aboutme.map(
+        (m) => sql`
+      INSERT INTO aboutme (content, interests) 
+      VALUES (${m.content}, ${JSON.stringify(m.interests)});
     `
       )
     );

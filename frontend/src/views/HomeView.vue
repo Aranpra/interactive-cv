@@ -20,7 +20,7 @@ import Skills from '@/components/userSkills.vue'
 import Projects from '@/components/userProjects.vue'
 import Contact from '@/components/userContact.vue'
 import AboutEducationSection from '@/components/AboutEducationSection.vue'
-import Achievement from '@/components/userAchievment.vue'
+import Achievement from '@/components/userAchievement.vue'
 // HIGHLIGHT END
 </script>
 

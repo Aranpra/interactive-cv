@@ -2,112 +2,27 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
-// const multer = require("multer");
 const { sql } = require("@vercel/postgres");
 
 require("dotenv").config({
   path: path.resolve(__dirname, "..", ".env.development.local"),
 });
 
-// console.log(
-//   "POSTGRES_URL loaded:",
-//   process.env.POSTGRES_URL ? "Yes (value hidden)" : "No"
-// );
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Ambil daftar origin yang diizinkan dari environment variable, lalu pecah menjadi array
-// const allowedOrigins = process.env.CORS_ORIGIN
-//   ? process.env.CORS_ORIGIN.split(",")
-//   : [];
-
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     // Izinkan jika origin (alamat frontend yang meminta) ada di dalam daftar kita,
-//     // atau jika tidak ada origin sama sekali (misalnya dari Postman atau aplikasi lain)
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   optionsSuccessStatus: 200,
-// };
-
 app.use(cors());
-app.use(express.json()); // HIGHLIGHT: Parser JSON, tapi ini TIDAK UNTUK multipart/form-data
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// HIGHLIGHT START: Tambahkan middleware untuk logging setiap request masuk
-// app.use((req, res, next) => {
-//   console.log(`Incoming Request: ${req.method} ${req.url}`);
-//   next();
-// });
-
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "uploads/");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, "profile-" + Date.now() + path.extname(file.originalname));
-//   },
-// });
-
-// const upload = multer({
-//   storage: storage,
-//   limits: { fileSize: 2 * 1024 * 1024 },
-//   fileFilter: (req, file, cb) => {
-//     const filetypes = /jpeg|jpg|png|gif/;
-//     const mimetype = filetypes.test(file.mimetype);
-//     const extname = path.extname(file.originalname).toLowerCase(); // HIGHLIGHT: Perbaikan kecil di sini
-//     const isImage = filetypes.test(mimetype) && filetypes.test(extname); // HIGHLIGHT: Perbaikan logika validasi
-
-//     if (mimetype && extname) {
-//       return cb(null, true);
-//     }
-//     cb(
-//       new Error(
-//         "File upload only supports the following filetypes - " + filetypes
-//       )
-//     );
-//   },
-// });
-
-// let profileImageUrl = "/uploads/default-profile.png";
-
-// app.post(
-//   "/api/upload-profile-photo",
-//   upload.single("profilePhoto"),
-//   (req, res) => {
-//     if (!req.file) {
-//       return res.status(400).json({ message: "No file uploaded." });
-//     }
-//     // HIGHLIGHT START: URL setelah upload juga harus relatif
-//     profileImageUrl = `/uploads/${req.file.filename}`;
-//     res.json({
-//       message: "Your handsome photo has been successfully updated!",
-//       imageUrl: profileImageUrl,
-//     });
-//     // HIGHLIGHT END
-//   }
-// );
 
 app.get("/", (req, res) => {
   res.send("Hallo dunia! Backend server is running.");
 });
 
-// app.get("/api/profile-photo", (req, res) => {
-//   console.log("API: /api/profile-photo called");
-//   res.json({ imageUrl: profileImageUrl });
-// });
-
 app.get("/api/education", async (req, res) => {
   console.log("API: /api/education called");
   try {
-    const { rows } = await sql`SELECT * FROM education ORDER BY period DESC;`; // HIGHLIGHT: Ini seharusnya bekerja dengan @vercel/postgres
+    const { rows } = await sql`SELECT * FROM education ORDER BY period DESC;`; 
     console.log("API: Fetched education data rows:", rows.length);
     res.status(200).json(rows);
   } catch (error) {
@@ -119,15 +34,17 @@ app.get("/api/education", async (req, res) => {
 });
 
 app.get("api/aboutme", async (req, res) => {
+  console.log("API: /api/aboutme called");
   try {
-    const { rows } = await sql`SELECT * FROM aboutme WHERE id = 1;`;
-    if (rows.length === 0) {
-      return res.status(404).json({ error: "Data About Me tidak ditemukan." });
-    }
+    const { rows } = await sql`SELECT * FROM aboutme;`;
+    console.log("API: Fetched skills data rows:", rows.length);
+    res.status(200).json(rows);
     res.status(200).json({ aboutMeText: rows[0].content });
   } catch (error) {
-    console.error("API Error: Gagal mengambil data About Me:", error);
-    res.status(500).json({ error: "Gagal mengambil data dari database." });
+    console.error("API Error: Failed to fetch aboutme data from DB:", error);
+    res
+      .status(500)
+      .json({ error: "Gagal mengambil data aboutme dari database." });
   }
 });
 
