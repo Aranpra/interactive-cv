@@ -33,13 +33,12 @@ app.get("/api/education", async (req, res) => {
   }
 });
 
-app.get("api/aboutme", async (req, res) => {
+app.get("/api/aboutme", async (req, res) => {
   console.log("API: /api/aboutme called");
   try {
     const { rows } = await sql`SELECT * FROM aboutme;`;
     console.log("API: Fetched skills data rows:", rows.length);
     res.status(200).json(rows);
-    res.status(200).json({ aboutMeText: rows[0].content });
   } catch (error) {
     console.error("API Error: Failed to fetch aboutme data from DB:", error);
     res
