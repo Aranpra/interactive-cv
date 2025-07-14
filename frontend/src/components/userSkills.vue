@@ -9,7 +9,7 @@
           class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl"
         >
           <img
-          :src="skill.iconUrl"
+          :src="skill.iconurl"
           :alt="skill.name + ' icon'"
           class="w-16 h-16 mx-auto mb-4"
           />
@@ -33,6 +33,7 @@ onMounted(async () => {
   try {
     const response = await axios.get(API_URL);
     skills.value = response.data;
+    console.log('Fetched Skills Data:', response.data);
   } catch (error) {
     console.error('Gagal mengambil data skill:', error);
   }
