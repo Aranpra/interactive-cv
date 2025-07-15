@@ -1,9 +1,9 @@
 <template>
-  <div class="p-8 bg-gray-50 rounded-lg shadow-lg h-full flex flex-col animate-slide-in-left">
+  <div class="p-5 md:p-8 bg-gray-50 rounded-lg shadow-lg h-full flex flex-col animate-slide-in-left">
     <section id="pendidikan" class="bg-gray-50">
       <div class="container mx-auto px-6">
         <h3
-          class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2 animate-fade-in"
+          class="text-lg md:text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2 animate-fade-in"
         >
           Pendidikan
         </h3>
@@ -17,10 +17,10 @@
             :style="{ 'transition-delay': index * 200 + 'ms' }"
           >
             <div v-if="index % 2 === 0" class="w-full flex">
-              <div class="w-1/2 pr-8 text-right">
-                <p class="font-semibold text-blue-600">{{ edu.period }}</p>
-                <h3 class="text-2xl font-bold text-gray-800">{{ edu.institution }}</h3>
-                <p class="text-gray-600">{{ edu.major }}</p>
+              <div class="w-1/2 pr-2 md:4 lg:pr-6 text-right">
+                <p class="text-xs md:text-sm font-semibold text-blue-600">{{ edu.period }}</p>
+                <h3 class="text-xs md:text-sm lg:text-xl font-bold text-gray-800">{{ edu.institution }}</h3>
+                <p class="text-xs md:text-sm text-gray-600">{{ edu.major }}</p>
               </div>
               <div class="w-1/2 flex justify-start">
                 <div
@@ -34,10 +34,10 @@
                   class="w-4 h-4 bg-blue-600 rounded-full z-10 justify-center text-white text-sm font-bold relative -right-2"
                 ></div>
               </div>
-              <div class="w-1/2 pl-8 text-left">
-                <p class="font-semibold text-blue-600">{{ edu.period }}</p>
-                <h3 class="text-2xl font-bold text-gray-800">{{ edu.institution }}</h3>
-                <p class="text-gray-600">{{ edu.major }}</p>
+              <div class="w-1/2 pl-3 lg:pl-6 text-left">
+                <p class="text-xs md:text-sm font-semibold text-blue-600">{{ edu.period }}</p>
+                <h3 class="text-xs md:text-sm lg:text-xl font-bold text-gray-800">{{ edu.institution }}</h3>
+                <p class="text-xs md:text-sm text-gray-600">{{ edu.major }}</p>
               </div>
             </div>
           </div>
@@ -63,7 +63,3 @@ onMounted(async () => {
   }
 })
 </script>
-
-<style scoped>
-/* Style spesifik di sini jika ada */
-</style>

@@ -1,8 +1,11 @@
 /* src/assets/main.css */
+html {
+  scroll-behavior: smooth;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Style untuk animasi scroll yang akan kita pakai nanti */
+
 .before-enter {
   opacity: 0;
   transform: translateY(100px);
@@ -12,8 +15,6 @@
   opacity: 1;
   transform: translateY(0px);
 }
-
-/* HIGHLIGHT: CSS UNTUK OVERLAY FOTO PROFIL */
 .group .bg-opacity-50 {
   opacity: 0;
 }
@@ -21,39 +22,40 @@
 .group:hover .bg-opacity-50 {
   opacity: 1;
 }
-
-/* HIGHLIGHT: CSS BARU UNTUK CROPPER MODAL (Tambahkan di bagian <styl scoped> Hero.vue atau di main.css jika kamu mau) */
-/* Pastikan CSS ini tidak bentrok dengan Tailwind atau CSS lainmu */
 .cropper-custom {
-  max-height: 100%; /* Pastikan cropper tidak melebihi tinggi container */
+  max-height: 100%;
   max-width: 100%;
-  width: 100%; /* Penting untuk mengisi container flex-grow */
-  height: 100%; /* Penting untuk mengisi container flex-grow */
-  background: #eee; /* Warna background cropper */
+  width: 100%;
+  height: 100%;
+  background: #eee;
 }
 
-/* HIGHLIGHT START: CSS BARU UNTUK ANIMASI RING */
 .animate-spin-slow {
-  animation: spin 5s linear infinite; /* Animasi berputar selama 5 detik, linear, berulang terus-menerus */
+  animation: spin 5s linear infinite;
 }
 
 @keyframes spin {
   from {
-    transform: rotate(0deg); /* Mulai dari 0 derajat */
+    transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg); /* Berputar hingga 360 derajat */
+    transform: rotate(360deg);
   }
 }
-/* HIGHLIGHT END: CSS BARU UNTUK ANIMASI RING */
-/* Anda bisa custom lebih lanjut CSS untuk stencil, dll. lihat dokumentasi vue-advanced-cropper */
 .group .bg-opacity-50,
-.group .border-blue-400 { /* Target ring juga */
+.group .border-blue-400 {
   opacity: 0;
 }
 
 .group:hover .bg-opacity-50,
-.group:hover .border-blue-400 { /* Target ring juga */
+.group:hover .border-blue-400 {
   opacity: 1;
 }
-/* HIGHLIGHT END: CSS UNTUK OVERLAY FOTO PROFIL */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

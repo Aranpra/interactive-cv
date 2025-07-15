@@ -17,6 +17,7 @@ export default defineConfig({
   },
   server: {
     host: true,
+    port: 5173,
   proxy: {
     '/api': {
       target: 'https://interactive-cv-production-1827.up.railway.app',

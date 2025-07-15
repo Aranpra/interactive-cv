@@ -8,22 +8,27 @@
       },
     ]"
   >
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="text-2xl font-bold text-gray-800">Arya Andrean Pratama</div>
+    <nav
+      class="container mx-auto px-6 py-4 flex justify-between items-center animate-slide-in-left"
+    >
+      <div class="text-l font-bold text-gray-800">Arya Andrean Pratama</div>
 
-      <div class="md:hidden">
+      <div class="md:hidden animate-slide-in-left">
         <button @click="isMobileMenuOpen = !isMobileMenuOpen" aria-label="Buka menu">
-          <svg
-            class="w-6 h-6 text-gray-800"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
+          <div class="flex flex-col justify-between w-6 h-4 transform transition-all duration-300">
+            <span
+              class="block h-0.5 w-full bg-gray-800 rounded-full transform transition-all duration-300"
+              :class="{ 'rotate-45 translate-y-2': isMobileMenuOpen }"
+            ></span>
+            <span
+              class="block h-0.5 w-full bg-gray-800 rounded-full transition-all duration-300"
+              :class="{ 'opacity-0': isMobileMenuOpen }"
+            ></span>
+            <span
+              class="block h-0.5 w-full bg-gray-800 rounded-full transform transition-all duration-300"
+              :class="{ '-rotate-45 -translate-y-2': isMobileMenuOpen }"
+            ></span>
+          </div>
         </button>
       </div>
 
@@ -36,69 +41,90 @@
         <li><a href="#kontak" class="nav-link">Kontak</a></li>
       </ul>
     </nav>
-
-    <div v-if="isMobileMenuOpen" class="md:hidden bg-white shadow-lg">
-      <ul class="flex flex-col items-center py-4">
-        <li class="w-full text-center">
-          <a href="#profil" @click="isMobileMenuOpen = false" class="nav-link-mobile">Profil</a>
-        </li>
-        <li class="w-full text-center">
-          <a href="#achievements" @click="isMobileMenuOpen = false" class="nav-link-mobile">Pencapaian</a>
-        </li>
-        <li class="w-full text-center">
-          <a href="#pendidikan-dan-tentangsaya" @click="isMobileMenuOpen = false" class="nav-link-mobile">Pendidikan</a>
-        </li>
-        <li class="w-full text-center">
-          <a href="#skill" @click="isMobileMenuOpen = false" class="nav-link-mobile">Skill</a>
-        </li>
-        <li class="w-full text-center">
-          <a href="#proyek" @click="isMobileMenuOpen = false" class="nav-link-mobile">Proyek</a>
-        </li>
-        <li class="w-full text-center">
-          <a href="#kontak" @click="isMobileMenuOpen = false" class="nav-link-mobile">Kontak</a>
-        </li>
-      </ul>
-    </div>
+    <transition name="dropdown">
+      <div
+        v-if="isMobileMenuOpen"
+        class="md:hidden bg-white shadow-lg absolute top-full right-3 mt-2 w-48 bg-white/90 background-blur-md border border-gray-200 rounded-lg"
+      >
+        <ul class="flex flex-col items-center py-4 hover:bg-blue">
+          <li class="w-full text-center">
+            <a href="#profil" @click="isMobileMenuOpen = false" class="nav-link-mobile">Profil</a>
+          </li>
+          <li class="w-full text-center">
+            <a href="#achievements" @click="isMobileMenuOpen = false" class="nav-link-mobile"
+              >Pencapaian</a
+            >
+          </li>
+          <li class="w-full text-center">
+            <a
+              href="#pendidikan-dan-tentangsaya"
+              @click="isMobileMenuOpen = false"
+              class="nav-link-mobile"
+              >Pendidikan</a
+            >
+          </li>
+          <li class="w-full text-center">
+            <a href="#skill" @click="isMobileMenuOpen = false" class="nav-link-mobile">Skill</a>
+          </li>
+          <li class="w-full text-center">
+            <a href="#proyek" @click="isMobileMenuOpen = false" class="nav-link-mobile">Proyek</a>
+          </li>
+          <li class="w-full text-center">
+            <a href="#kontak" @click="isMobileMenuOpen = false" class="nav-link-mobile">Kontak</a>
+          </li>
+        </ul>
+      </div>
+    </transition>
   </header>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 
 // State baru untuk mengontrol menu mobile
-const isMobileMenuOpen = ref(false);
+const isMobileMenuOpen = ref(false)
 
-const hideNavbar = ref(false);
-const showNavbar = ref(true);
-let lastScrollY = 0;
-const scrollThreshold = 50;
+const hideNavbar = ref(false)
+const showNavbar = ref(true)
+let lastScrollY = 0
+const scrollThreshold = 50
 
 const handleScroll = () => {
   if (isMobileMenuOpen.value) {
-    return;
+    return
   }
-  const currentScrollY = window.scrollY;
+
+  const currentScrollY = window.scrollY
   if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
-    hideNavbar.value = true;
-    showNavbar.value = false;
+    hideNavbar.value = true
+    showNavbar.value = false
   } else if (currentScrollY < lastScrollY || currentScrollY <= scrollThreshold) {
-    hideNavbar.value = false;
-    showNavbar.value = true;
+    hideNavbar.value = false
+    showNavbar.value = true
   }
-  lastScrollY = currentScrollY;
-};
+  lastScrollY = currentScrollY
+}
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
+  window.addEventListener('scroll', handleScroll)
+})
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style scoped>
-/* Tambahkan style ini untuk link navigasi agar lebih rapi */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
 .nav-link {
   @apply text-gray-600 hover:text-blue-600 transform hover:-translate-y-0.5 transition-all duration-300;
 }

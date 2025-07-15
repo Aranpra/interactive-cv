@@ -6,6 +6,10 @@ export default {
   // HIGHLIGHT END
   theme: {
     extend: {
+      fontSize: {
+        xxs: '0.625rem',
+        xxxs: '0.5rem',
+      },
       colors: {
         'primary-dark': '#5409DA', // Biru Keunguan (paling gelap)
         'accent-blue': '#4E71FF', // Biro Cerah

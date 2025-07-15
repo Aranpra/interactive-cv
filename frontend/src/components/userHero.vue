@@ -19,33 +19,35 @@
         Hubungi Saya
       </a>
     </div>
-    <div
-      class="md:w-1/2 flex flex-col items-center justify-center  animate-fade-in duration-2000"
-    >
-
+    <div class="md:w-1/2 flex flex-col items-center justify-center animate-fade-in duration-2000">
       <div
         class="relative group w-80 h-80 rounded-full overflow-hidden shadow-xl border-4 border-accent-blue ring-8 ring-light-blue"
         @mouseenter="showOverlay = true"
         @mouseleave="showOverlay = false"
-      > <img src="./public/Arya_24.11.5739.jpg" alt="Foto Profil" class="w-80 h-80 rounded-full object-cover shadow-lg"> </div>
+      >
+        <img
+          src="./public/Arya_24.11.5739.jpg"
+          alt="Foto Profil"
+          class="w-80 h-80 rounded-full object-cover shadow-lg"
+        />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import 'vue-advanced-cropper/dist/style.css'
 import Typed from 'typed.js'
 
 onMounted(() => {
   new Typed('#typed', {
-    strings: ['Web Developer', 'UI/UX Designer', 'Informatics Student', 'Gamer', 'Singer'],
+    strings: ['Web Developer', 'UI/UX Designer', 'Informatics Student', 'Gamer'],
     typeSpeed: 80,
     backSpeed: 50,
     loop: true,
   })
 })
-
 </script>
 
 <style>
